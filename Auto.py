@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.messagebox import *
-from PIL import *
 
 
 class LoginWindow(Frame):
@@ -43,6 +42,24 @@ class LoginWindow(Frame):
         self.send_btn.pack(padx=10, pady=8)
 
     def login(self):
+        text = self.username_entry.get()
+        result1 = 'Имя пользователя: ' + text
+        self.username_entry['text'] = result1
+        print(result1)
+
+        text = self.password_entry.get()
+        result2 = 'Пароль: ' + text
+        self.password_entry['text'] = result2
+        print(result2)
+
+        self.file = open('login_information.txt', 'w')
+        self.file.writelines(self.username_entry.get())
+        self.file.close()
+
+        self.file = open('password_information.txt', 'w')
+        self.file.writelines(self.password_entry.get())
+        self.file.close()
+
         log = self.username_entry.get()
         psw = self.password_entry.get()
         if log == 'Admin' and psw == 'admin':
@@ -54,6 +71,7 @@ class LoginWindow(Frame):
             log = self.username_entry.get()
             psw = self.password_entry.get()
             showerror('ERROR', 'Введено не верное имя или пароль')
+
 
     def sign(self):
         cno = self.send_btn
@@ -104,6 +122,14 @@ class Sign_Menu(Frame):
         self.pas_btn.pack(padx=10, pady=8)
 
     def login_win(self):
+        self.file = open('login_user.txt', 'w')
+        self.file.writelines(self.usernam_entry.get())
+        self.file.close()
+
+        self.file = open('password_user.txt', 'w')
+        self.file.writelines(self.pasword_entry.get())
+        self.file.close()
+
         log = self.usernam_entry.get()
         psw = self.pasword_entry.get()
         if log == '' and psw == '':
@@ -581,6 +607,17 @@ class Admin_Menu(Frame):
         self.file.writelines('\n'.join(self.lst_window5.get(0, END)))
         self.file.close()
         showinfo('Azpetrol', 'Данные успешно сохранились в ваши файлы')
+
+        self.file = open('menu_information.txt', 'w')
+        self.file.writeline('\n'.join(self.save_btn))
+        self.file.close()
+
+        self.my_menu = (f'\nВ меню добавлен/а - {self.lst_window1.get(0)}'
+              f'\nВ меню добавлен - {self.lst_window2.get(0)}'
+              f'\nВ меню добавлен - {self.lst_window3.get(0)}'
+              f'\nВ меню добавлен - {self.lst_window4.get(0)}'
+              f'\nВ меню добавлен - {self.lst_window5.get(0)}')
+        print(self.my_menu)
 
 if __name__ == '__main__':
     root = Tk()
