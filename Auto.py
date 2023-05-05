@@ -582,7 +582,7 @@ class Admin_Menu(Frame):
         self.file.close()
         showinfo('Azpetrol', 'Данные успешно сохранились в ваши файлы')
 
-if __name__ == '__main__':
+if __name__ == '__main__'
     root = Tk()
     log_window = LoginWindow(root)
     log_window.mainloop()
